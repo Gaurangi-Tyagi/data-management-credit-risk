@@ -1,0 +1,42 @@
+# Databricks
+*.pyc
+__pycache__/
+.databricks/
+.idea/
+*.jar
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.venv
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials
+credentials.json
+secrets.json
+config.json
+
+# Logs
+*.log
+logs/
+
+# Data
+*.csv
+*.json
+*.parquet
+*.xlsx
