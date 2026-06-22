@@ -379,26 +379,22 @@ AI tools were used selectively to support development. Specifically, AI was used
 
 ## Screenshots
 
-### Data Exploration
+### Catalog & Volume Structure
 
-![Data Exploration](ADD_GITHUB_LINK_HERE: Data_Management_1.png)
-
-### Workspace Structure
-
-![Workspace](ADD_GITHUB_LINK_HERE: File_structure.png)
+![Catalog](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Catalog.png)
 
 ### Dashboard
 
-![Dashboards Page](ADD_GITHUB_LINK_HERE: Dashboard_Databricks.png)
+![Dashboards Page](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Dashboard_Databricks.png)
 
-![Dashboard View](ADD_GITHUB_LINK_HERE: Dashboard_1.png)
+![Dashboard View](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Dashboard_1.png)
 
-![Dashboard Datasets](ADD_GITHUB_LINK_HERE: Dashboard_data.png)
+![Dashboard Datasets](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Dashboard_data.png)
 
 ### Scheduled Job
 
-![Jobs Page](ADD_GITHUB_LINK_HERE: Scheduled_Job.png)
+![Jobs Page](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Scheduled_Job.png)
 
-![Run History](ADD_GITHUB_LINK_HERE: Scheduled_Job_2.png)
+![Run History](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Scheduled_Job_2.png)
 
-![Pipeline Tasks](ADD_GITHUB_LINK_HERE: Task.png)
+![Pipeline Tasks](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Task.png)
