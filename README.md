@@ -238,8 +238,6 @@ GROUP BY assigned_country, risk_segment
 ORDER BY gdp_billions DESC;
 ```
 
-> **Note on SQL Editor:** An attempt was made to save queries via the Databricks SQL Editor and link them to the dashboard, but the dashboard did not support linking SQL Editor queries directly. All queries were added inside the dashboard editor as datasets instead.
-
 ---
 
 ## Scheduled Job
@@ -365,7 +363,7 @@ Databases:
 
 ## AI Assistance
 
-AI tools were used selectively to support development. Specifically, AI was used for debugging pipeline errors, clarifying PySpark syntax (coalesce, when, cast, Auto Loader stream options), and navigating the Databricks interface. All architectural decisions, data source selection, business logic, and project structure were independently determined.
+AI tools were used selectively to support development. Specifically, AI was used for debugging pipeline errors, clarifying PySpark syntax (coalesce, when, cast, Auto Loader stream options), navigating the Databricks interface, drafting and structuring this README, and providing guidance on the overall pipeline architecture. All final decisions on data sources, business logic, implementation, and project structure were independently determined and executed.
 
 ---
 
