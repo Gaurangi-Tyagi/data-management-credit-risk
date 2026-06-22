@@ -1,26 +1,6 @@
 {
   "datasets": [
     {
-      "name": "3b5a292b",
-      "displayName": "Risk Metrics Overview",
-      "queryLines": [
-        "SELECT \r\n",
-        "    risk_segment,\r\n",
-        "    family_status,\r\n",
-        "    education_type,\r\n",
-        "    total_customers,\r\n",
-        "    defaulted_customers,\r\n",
-        "    default_rate_percent,\r\n",
-        "    ROUND(avg_credit_amount, 2) as avg_credit_amount,\r\n",
-        "    ROUND(avg_income, 2) as avg_income,\r\n",
-        "    ROUND(avg_credit_to_income_ratio, 2) as credit_to_income_ratio\r\n",
-        "FROM dm2_credit_risk.gold_credit_risk_metrics\r\n",
-        "ORDER BY default_rate_percent DESC;"
-      ],
-      "catalog": "workspace",
-      "schema": "dm2_credit_risk"
-    },
-    {
       "name": "098b162a",
       "displayName": "Default Rate by Risk Segment",
       "queryLines": [
@@ -68,63 +48,39 @@
       "name": "6e8b70e2",
       "displayName": "Average Income by Risk Segment",
       "queryLines": [
-        "SELECT \r\n",
-        "    risk_segment,\r\n",
-        "    ROUND(AVG(avg_income), 2) as average_income,\r\n",
-        "    ROUND(AVG(avg_credit_amount), 2) as average_credit\r\n",
-        "FROM dm2_credit_risk.gold_credit_risk_metrics\r\n",
-        "GROUP BY risk_segment\r\n",
-        "ORDER BY average_income DESC;"
-      ],
-      "catalog": "workspace",
-      "schema": "dm2_credit_risk"
-    },
-    {
-      "name": "1b993254",
-      "displayName": "Top 5 Riskiest Family Status",
-      "queryLines": [
-        "SELECT \r\n",
-        "    family_status,\r\n",
-        "    SUM(total_customers) as total_customers,\r\n",
-        "    SUM(defaulted_customers) as defaulted,\r\n",
-        "    ROUND(SUM(defaulted_customers) / SUM(total_customers) * 100, 2) as default_rate\r\n",
-        "FROM dm2_credit_risk.gold_credit_risk_metrics\r\n",
-        "GROUP BY family_status\r\n",
-        "ORDER BY default_rate DESC\r\n",
-        "LIMIT 5;"
-      ],
-      "catalog": "workspace",
-      "schema": "dm2_credit_risk"
+        "SELECT\n",
+        "  risk_segment,\n",
+        "  assigned_country,\n",
+        "  ROUND(AVG(avg_income), 0) as average_income,\n",
+        "  ROUND(AVG(country_gdp_usd), 0) as country_gdp,\n",
+        "  ROUND(AVG(avg_income) / AVG(country_gdp_usd) * 100, 4) as income_as_pct_of_gdp\n",
+        "FROM\n",
+        "  dm2_credit_risk.gold_credit_risk_metrics\n",
+        "GROUP BY\n",
+        "  risk_segment,\n",
+        "  assigned_country\n",
+        "ORDER BY\n",
+        "  average_income DESC"
+      ]
     },
     {
       "name": "c8f07782",
       "displayName": "Credit to Income Ratio by Risk",
       "queryLines": [
-        "SELECT \r\n",
-        "    risk_segment,\r\n",
-        "    ROUND(AVG(avg_credit_to_income_ratio), 2) as avg_ratio\r\n",
-        "FROM dm2_credit_risk.gold_credit_risk_metrics\r\n",
-        "GROUP BY risk_segment\r\n",
-        "ORDER BY avg_ratio DESC;"
-      ],
-      "catalog": "workspace",
-      "schema": "dm2_credit_risk"
-    },
-    {
-      "name": "8a9f066d",
-      "displayName": "Education Type Analysis",
-      "queryLines": [
-        "SELECT \r\n",
-        "    education_type,\r\n",
-        "    SUM(total_customers) as customers,\r\n",
-        "    SUM(defaulted_customers) as defaults,\r\n",
-        "    ROUND(SUM(defaulted_customers) / SUM(total_customers) * 100, 2) as default_rate\r\n",
-        "FROM dm2_credit_risk.gold_credit_risk_metrics\r\n",
-        "GROUP BY education_type\r\n",
-        "ORDER BY default_rate DESC;"
-      ],
-      "catalog": "workspace",
-      "schema": "dm2_credit_risk"
+        "SELECT\n",
+        "  assigned_country,\n",
+        "  risk_segment,\n",
+        "  ROUND(AVG(avg_credit_to_income_ratio), 2) as avg_ratio,\n",
+        "  ROUND(AVG(country_gdp_usd) / 1000000000, 2) as gdp_billions,\n",
+        "  SUM(total_customers) as total_customers\n",
+        "FROM\n",
+        "  dm2_credit_risk.gold_credit_risk_metrics\n",
+        "GROUP BY\n",
+        "  assigned_country,\n",
+        "  risk_segment\n",
+        "ORDER BY\n",
+        "  gdp_billions DESC"
+      ]
     },
     {
       "name": "b6d830be",
@@ -316,115 +272,6 @@
         },
         {
           "widget": {
-            "name": "risk_metrics_table",
-            "queries": [
-              {
-                "name": "main_query",
-                "query": {
-                  "datasetName": "3b5a292b",
-                  "fields": [
-                    {
-                      "name": "risk_segment",
-                      "expression": "`risk_segment`"
-                    },
-                    {
-                      "name": "family_status",
-                      "expression": "`family_status`"
-                    },
-                    {
-                      "name": "education_type",
-                      "expression": "`education_type`"
-                    },
-                    {
-                      "name": "total_customers",
-                      "expression": "`total_customers`"
-                    },
-                    {
-                      "name": "defaulted_customers",
-                      "expression": "`defaulted_customers`"
-                    },
-                    {
-                      "name": "default_rate_percent",
-                      "expression": "`default_rate_percent`"
-                    },
-                    {
-                      "name": "avg_credit_amount",
-                      "expression": "`avg_credit_amount`"
-                    },
-                    {
-                      "name": "avg_income",
-                      "expression": "`avg_income`"
-                    },
-                    {
-                      "name": "credit_to_income_ratio",
-                      "expression": "`credit_to_income_ratio`"
-                    }
-                  ],
-                  "disaggregated": true
-                }
-              }
-            ],
-            "spec": {
-              "version": 2,
-              "frame": {
-                "title": "Risk Metrics Overview",
-                "showTitle": true
-              },
-              "widgetType": "table",
-              "encodings": {
-                "columns": [
-                  {
-                    "fieldName": "risk_segment",
-                    "useForSearch": true
-                  },
-                  {
-                    "fieldName": "family_status",
-                    "useForSearch": true
-                  },
-                  {
-                    "fieldName": "education_type",
-                    "useForSearch": true
-                  },
-                  {
-                    "fieldName": "total_customers",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "defaulted_customers",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "default_rate_percent",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "avg_credit_amount",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "avg_income",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "credit_to_income_ratio",
-                    "useForSearch": false
-                  }
-                ]
-              },
-              "data": {
-                "queryName": "main_query"
-              }
-            }
-          },
-          "position": {
-            "x": 0,
-            "y": 3,
-            "width": 12,
-            "height": 6
-          }
-        },
-        {
-          "widget": {
             "name": "default_rate_bar",
             "queries": [
               {
@@ -473,9 +320,9 @@
           },
           "position": {
             "x": 0,
-            "y": 9,
+            "y": 3,
             "width": 6,
-            "height": 6
+            "height": 4
           }
         },
         {
@@ -528,78 +375,9 @@
           },
           "position": {
             "x": 6,
-            "y": 15,
+            "y": 7,
             "width": 6,
-            "height": 6
-          }
-        },
-        {
-          "widget": {
-            "name": "riskiest_family_table",
-            "queries": [
-              {
-                "name": "main_query",
-                "query": {
-                  "datasetName": "1b993254",
-                  "fields": [
-                    {
-                      "name": "family_status",
-                      "expression": "`family_status`"
-                    },
-                    {
-                      "name": "total_customers",
-                      "expression": "`total_customers`"
-                    },
-                    {
-                      "name": "defaulted",
-                      "expression": "`defaulted`"
-                    },
-                    {
-                      "name": "default_rate",
-                      "expression": "`default_rate`"
-                    }
-                  ],
-                  "disaggregated": true
-                }
-              }
-            ],
-            "spec": {
-              "version": 2,
-              "frame": {
-                "title": "Top 5 Riskiest Family Status",
-                "showTitle": true
-              },
-              "widgetType": "table",
-              "encodings": {
-                "columns": [
-                  {
-                    "fieldName": "family_status",
-                    "useForSearch": true
-                  },
-                  {
-                    "fieldName": "total_customers",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "defaulted",
-                    "useForSearch": false
-                  },
-                  {
-                    "fieldName": "default_rate",
-                    "useForSearch": false
-                  }
-                ]
-              },
-              "data": {
-                "queryName": "main_query"
-              }
-            }
-          },
-          "position": {
-            "x": 0,
-            "y": 21,
-            "width": 6,
-            "height": 6
+            "height": 4
           }
         },
         {
@@ -651,10 +429,10 @@
             }
           },
           "position": {
-            "x": 6,
-            "y": 21,
-            "width": 6,
-            "height": 6
+            "x": 0,
+            "y": 11,
+            "width": 12,
+            "height": 3
           }
         },
         {
@@ -707,9 +485,9 @@
           },
           "position": {
             "x": 6,
-            "y": 9,
+            "y": 3,
             "width": 6,
-            "height": 6
+            "height": 4
           }
         },
         {
@@ -762,9 +540,9 @@
           },
           "position": {
             "x": 0,
-            "y": 15,
+            "y": 7,
             "width": 6,
-            "height": 6
+            "height": 4
           }
         }
       ],
@@ -774,7 +552,15 @@
   ],
   "uiSettings": {
     "theme": {
-      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+      "widgetHeaderAlignment": "CENTER",
+      "fontSettings": {
+        "base": {
+          "fontSize": 13
+        },
+        "widgetTitle": {
+          "fontWeight": 600
+        }
+      }
     },
     "applyModeEnabled": false
   }
