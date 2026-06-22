@@ -393,8 +393,8 @@ AI tools were used selectively to support development. Specifically, AI was used
 
 ### Scheduled Job
 
-![Jobs Page](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Scheduled_Job.png)
+![Jobs Page](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Scheduled%20Job.png)
 
-![Run History](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Scheduled_Job_2.png)
+![Run History](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Scheduled%20Job%202.png)
 
 ![Pipeline Tasks](https://raw.githubusercontent.com/Gaurangi-Tyagi/data-management-credit-risk/main/screenshots/Task.png)
